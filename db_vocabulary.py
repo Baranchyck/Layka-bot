@@ -25,7 +25,7 @@ REPLACEMENTS = {
     r"\bблядствова(?:ть|л[аои]?|ю|ет|ют)\b": "пустувати",      # блядствовать
     r"\bблядун(?:[а-яё]+)?\b": "бабій",                     # блядун
     r"\bбляд[ьіи]\b": "хвойда",                              # блядь
-    r"\bблядька(?:ть|л[аои]?|ет|ют)\b": "лихословити",            # блядькать
+    r"\bблядька(?:ть|л[аои]?|ет|ют|й)\b": "лихословити",            # блядькать
     r"\bблядькну(?:ть|л[аои]?|ет|ут)\b": "клясти",           # блядькнуть
     r"\bвыбляд(?:ок|ка|ку|ком|ке|ки|ков)\b": "байстрюк",       # выблядок
 
@@ -112,18 +112,5 @@ REPLACEMENTS = {
     # --- ІНШЕ ---
     r"\bговн[оа-яё]*\b": "кізяк",                           # говно
     r"\bговножу[йяеі](?:[а-яё]+)?\b": "гівняр",             # говножуй
+    r"\bz+\b": "друzі"
 }
-
-
-def censor_message(text: str) -> tuple[str, bool]:
-    is_modified = False
-
-    for pattern, replacement in REPLACEMENTS.items():
-        # subn повертає кортеж: (новий_текст, кількість_замін)
-        text, count = re.subn(
-            pattern, replacement, text, flags=re.IGNORECASE | re.UNICODE
-        )
-        if count > 0:
-            is_modified = True
-
-    return text, is_modified
